@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Юристга мурожаат</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      color: #1a3d7c;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #1a3d7c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>🧾 Юристга мурожаат</h2>
+  <form id="form">
+    <label>👤 Исмингиз</label>
+    <input type="text" name="name" required />
+
+    <label>📱 Телефон рақам</label>
+    <input type="tel" name="phone" required placeholder="+99890..." />
+
+    <label>📂 Мурожаат тури</label>
+    <select name="type" required>
+      <option value="sotuv">Олди-сотди шартномаси</option>
+      <option value="ijara">Ижара шартномаси</option>
+      <option value="maslahat">Юридик маслаҳат</option>
+    </select>
+
+    <label>✍️ Қўшимча изоҳ</label>
+    <textarea name="comment" rows="4"></textarea>
+
+    <button type="submit">📨 Юбориш</button>
+  </form>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      tg.sendData(JSON.stringify(data));
+      tg.close();
+    });
+
+    tg.expand();
+  </script>
+</body>
+</html>
